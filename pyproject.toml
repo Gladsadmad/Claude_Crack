@@ -1,0 +1,60 @@
+[build-system]
+requires = ["hatchling>=1.21"]
+build-backend = "hatchling.build"
+
+[project]
+name = "claude-crack"
+version = "0.1.0"
+description = "A small, cross-platform, embeddable client for Anthropic's Claude that drops cleanly into any app."
+readme = "README.md"
+requires-python = ">=3.9"
+license = { file = "LICENSE" }
+authors = [{ name = "Christopher S. Day", email = "c.daddyday@gmail.com" }]
+keywords = ["claude", "anthropic", "llm", "ai", "chat", "cross-platform", "sdk", "client"]
+classifiers = [
+    "Development Status :: 4 - Beta",
+    "Intended Audience :: Developers",
+    "License :: OSI Approved :: MIT License",
+    "Operating System :: OS Independent",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.9",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Programming Language :: Python :: 3.13",
+    "Topic :: Software Development :: Libraries :: Python Modules",
+    "Topic :: Scientific/Engineering :: Artificial Intelligence",
+]
+dependencies = [
+    "anthropic>=0.49",
+]
+
+[project.optional-dependencies]
+async = ["anthropic[aiohttp]>=0.49"]
+dev = [
+    "pytest>=7.4",
+    "pytest-asyncio>=0.23",
+    "ruff>=0.5",
+]
+
+[project.urls]
+Homepage = "https://github.com/Gladsadmad/Claude_Crack"
+Repository = "https://github.com/Gladsadmad/Claude_Crack"
+Issues = "https://github.com/Gladsadmad/Claude_Crack/issues"
+
+[project.scripts]
+claude-crack = "claude_crack.cli:main"
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/claude_crack"]
+
+[tool.pytest.ini_options]
+asyncio_mode = "auto"
+testpaths = ["tests"]
+
+[tool.ruff]
+line-length = 100
+target-version = "py39"
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "UP", "B"]

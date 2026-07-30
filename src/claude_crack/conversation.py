@@ -121,6 +121,8 @@ class ChatEngine:
 
     def save(self, path: str | Path) -> Path:
         """Save the conversation to a JSON file and return the path."""
+        if ".." in str(path):
+            raise Exception("Invalid file path")
         path = Path(path)
         path.parent.mkdir(parents=True, exist_ok=True)
         path.write_text(json.dumps(self.to_dict(), indent=2), encoding="utf-8")
